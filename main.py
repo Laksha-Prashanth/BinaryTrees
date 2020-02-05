@@ -1,22 +1,52 @@
 import BSTree
+import AVLTree
+import randomInt
+import time
 
 def main():
-    print("Welcome to Binary Search Trees")
-    print("1. Insert a node\n2. Delete a node\n3.Find-next\n4.Find-prev\n5.Find-min\n6.Find-max")
+    inputArray = randomInt.getRandomArray()
+    bstree = BSTree.Tree()
+    avltree = AVLTree.AVLTree()
 
-    tree = BSTree.Tree()
-    while True:
-        x = input("Waiting for input: ")
-        if x == "1":
-            a = input()
-            tree.insert(int(a))
-            
-        else:
-            break
+    bstlevels = 0
 
-        tree.printInorder()
+    start = time.time()
+    for i in inputArray:
+        bstree.insert(i)
+        bstlevels += bstree.levels
+    end = time.time()
+    print("BSTree insertion time: ",end-start)
+
+    avllevels = 0
+    start = time.time()
+    for i in inputArray:
+        avltree.insert(i)
+        avllevels += avltree.levels
+    end = time.time()
+    print("AVLTree insertion time: ",end-start)
+
+    print("Average levels in binarysearch tree: ",bstlevels/10000)
+    print("Average levels in AVL tree: ",avllevels/10000)
 
 
+    bstlevels = 0
+    start = time.time()
+    for i in inputArray:
+        bstree.delete(i)
+        bstlevels += bstree.levels
+    end = time.time()
+    print("BSTree deletion time: ",end-start)
+
+    avllevels = 0
+    start = time.time()
+    for i in inputArray:
+        avltree.delete(i)
+        avllevels += avltree.levels
+    end = time.time()
+    print("AVLTree deletion time: ",end-start)
+
+    print("Average levels in binarysearch tree: ",bstlevels/10000)
+    print("Average levels in AVL tree: ",avllevels/10000)
 
 
 if __name__ == "__main__":
